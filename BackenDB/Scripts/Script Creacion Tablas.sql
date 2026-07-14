@@ -11,6 +11,12 @@
 *     ndo con el tempo le iniciare
 *
 ******************************************************
+*     FECHA: 13 de Julio 2026         
+*     AUTOR: Erneys Solano
+*     ACCION: Agregar campos Tbl_Persona
+*     
+*     DESCRIPCION:
+*     se agreagan campos fecha_nacimiento y edad
 */
 
 
@@ -254,3 +260,7 @@ alter table Tbl_Usario
 add constraint FK_Estado_Usuario
 foreign key (id_estado)
 references Tbl_Estado(codigo)
+------------------------------------------------------------agragacion campos--13  de julio del 2026
+alter table Tbl_Persona
+add fecha_nacimiento DATE NOT NULL DEFAULT '1900-01-01',
+edad int;
