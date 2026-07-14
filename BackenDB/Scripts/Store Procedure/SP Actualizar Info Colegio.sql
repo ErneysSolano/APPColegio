@@ -8,22 +8,30 @@
 *     actualizar colegio
 *
 ******************************************************
+*     FECHA: 19-02-2026          
+*     AUTOR: Erneys Solano
+*     ACCION: se actualiza SP actualizar info colegio
+*     
+*     DESCRIPCION:
+*     Se realiza actualizacion del SP
+*     actualizar colegio
+*
 */
 
 use DBColegio
 go
 
 
-CREATE PROCEDURE sp_actualizar_colegio
+ALTER PROCEDURE sp_actualizar_colegio
 @nit BIGINT,
-@nombre VARCHAR (20),
-@direccion VARCHAR (50),
-@telefono VARCHAR (7),
-@celular VARCHAR (10),
-@correo VARCHAR (30),
-@nivel_academico INT,
-@tipo_colegio INT,
-@estado_colegio INT,
+@nombre VARCHAR (20) = null,
+@direccion VARCHAR (50) = null,
+@telefono VARCHAR (7) = null,
+@celular VARCHAR (10) = null,
+@correo VARCHAR (30) = null,
+@nivel_academico INT = null,
+@tipo_colegio INT = null,
+@estado_colegio INT = null,
 
 @resultCode INT OUTPUT,
 @resultMsg NVARCHAR (200) OUTPUT
@@ -41,14 +49,14 @@ BEGIN
        END
 
        UPDATE  Tbl_Colegio
-       SET     nombre =    @nombre,
-               direccion = @direccion,
-               telefono =  @telefono,
-               celular =   @celular,
-               correo =    @correo,
-               id_nivel_Academico = @nivel_academico,
-               id_tipo =   @tipo_colegio,
-               id_estado = @estado_colegio
+       SET     nombre =   ISNULL(@nombre, nombre),
+               direccion = ISNULL(@direccion, direccion),
+               telefono =  ISNULL(@telefono, telefono),
+               celular =   ISNULL(@celular, celular),
+               correo =    ISNULL(@correo,correo),
+               id_nivel_Academico = ISNULL(@nivel_academico, id_nivel_Academico),
+               id_tipo =   ISNULL(@tipo_colegio,id_tipo),
+               id_estado = ISNULL(@estado_colegio, id_estado)
        WHERE   nit = @nit
 
        IF @@ROWCOUNT = 0
